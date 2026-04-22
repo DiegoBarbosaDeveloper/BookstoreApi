@@ -9,11 +9,13 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ustavillavicencio.edu.co.enums.BookState;
 
 @Entity
@@ -21,6 +23,7 @@ import ustavillavicencio.edu.co.enums.BookState;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class BookEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,5 +47,10 @@ public class BookEntity {
     private String isbn;
 
     @ManyToOne(optional = false)
+    @JoinColumn(name = "author_id", nullable = false)
     private AuthorEntity author;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "category_id", nullable = false)
+    private CategoryEntity category;
 }

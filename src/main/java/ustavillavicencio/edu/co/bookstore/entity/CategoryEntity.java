@@ -2,8 +2,6 @@ package ustavillavicencio.edu.co.bookstore.entity;
 
 import java.util.List;
 
-import org.springframework.format.annotation.NumberFormat;
-
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,42 +11,29 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "authors")
+@Table(name = "categories")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class AuthorEntity {
-    
+public class CategoryEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @Column(nullable = false)
-    private String biography;
+    private String description;
 
-    @Email
-    @Column(unique = true, nullable = false) 
-    private String email;
-
-    @Column(nullable = false)
-    private String phoneNumber;
-
-    @NumberFormat(pattern = "##")
-    @Column(nullable = false)
-    private Byte age;
-
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<BookEntity> books;
-
 }
