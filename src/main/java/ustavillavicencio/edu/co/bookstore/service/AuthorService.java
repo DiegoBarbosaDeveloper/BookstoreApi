@@ -9,7 +9,8 @@ import ustavillavicencio.edu.co.bookstore.dto.request.AuthorRequest;
 import ustavillavicencio.edu.co.bookstore.dto.response.AuthorResponse;
 import ustavillavicencio.edu.co.bookstore.dto.response.BookResponse;
 import ustavillavicencio.edu.co.bookstore.entity.AuthorEntity;
-
+import ustavillavicencio.edu.co.bookstore.exception.custom.AuthorHasBooksException;
+import ustavillavicencio.edu.co.bookstore.exception.custom.ResourceNotFoundException;
 import ustavillavicencio.edu.co.bookstore.mapper.AuthorMapper;
 import ustavillavicencio.edu.co.bookstore.mapper.BookMapper;
 import ustavillavicencio.edu.co.bookstore.repository.AuthorRepository;
@@ -55,7 +56,7 @@ public class AuthorService {
 	public void delete(Long id) {
 		getAuthorOrThrow(id);
 		if (bookRepository.existsByAuthorId(id)) {
-			throw new AuthorHasBooksException(id);
+			throw new AuthorHasBooksException("No se puede eliminar el autor con id " + id + " porque tiene libros asociados");
 		}
 		authorRepository.deleteById(id);
 	}
@@ -69,6 +70,6 @@ public class AuthorService {
 
 	private AuthorEntity getAuthorOrThrow(Long id) {
 		return authorRepository.findById(id)
-			.orElseThrow(() -> new ResourceNotFoundException("Autor", id));
+			.orElseThrow(() -> new ResourceNotFoundException("Autor con id " + id + " no encontrado"));
 	}
 }

@@ -10,7 +10,7 @@ import ustavillavicencio.edu.co.bookstore.dto.response.BookResponse;
 import ustavillavicencio.edu.co.bookstore.entity.AuthorEntity;
 import ustavillavicencio.edu.co.bookstore.entity.BookEntity;
 import ustavillavicencio.edu.co.bookstore.entity.CategoryEntity;
-
+import ustavillavicencio.edu.co.bookstore.exception.custom.ResourceNotFoundException;
 import ustavillavicencio.edu.co.bookstore.mapper.BookMapper;
 import ustavillavicencio.edu.co.bookstore.repository.AuthorRepository;
 import ustavillavicencio.edu.co.bookstore.repository.BookRepository;
@@ -79,16 +79,16 @@ public class BookService {
 
 	private BookEntity getBookOrThrow(Long id) {
 		return bookRepository.findById(id)
-			.orElseThrow(() -> new ResourceNotFoundException("Libro", id));
+			.orElseThrow(() -> new ResourceNotFoundException("Libro con id " + id + " no encontrado"));
 	}
 
 	private AuthorEntity getAuthorOrThrow(Long id) {
 		return authorRepository.findById(id)
-			.orElseThrow(() -> new ResourceNotFoundException("Autor", id));
+			.orElseThrow(() -> new ResourceNotFoundException("Autor con id " + id + " no encontrado"));
 	}
 
 	private CategoryEntity getCategoryOrThrow(Long id) {
 		return categoryRepository.findById(id)
-			.orElseThrow(() -> new ResourceNotFoundException("Categoria", id));
+			.orElseThrow(() -> new ResourceNotFoundException("Categoria con id " + id + " no encontrada"));
 	}
 }
