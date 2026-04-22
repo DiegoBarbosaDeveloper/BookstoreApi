@@ -12,14 +12,9 @@ import lombok.RequiredArgsConstructor;
 import ustavillavicencio.edu.co.bookstore.dto.Request.OrderItemRequest;
 import ustavillavicencio.edu.co.bookstore.dto.Request.OrderRequest;
 import ustavillavicencio.edu.co.bookstore.dto.Response.OrderResponse;
-import ustavillavicencio.edu.co.bookstore.entity.Book;
 import ustavillavicencio.edu.co.bookstore.entity.OrderItem;
 import ustavillavicencio.edu.co.bookstore.entity.OrderStatus;
-import ustavillavicencio.edu.co.bookstore.exception.custom.InsufficientStockException;
-import ustavillavicencio.edu.co.bookstore.exception.custom.InvalidOrderStateException;
-import ustavillavicencio.edu.co.bookstore.exception.custom.UnauthorizedAccessException;
 import ustavillavicencio.edu.co.bookstore.mapper.OrderMapper;
-import ustavillavicencio.edu.co.bookstore.repository.BookRepository;
 import ustavillavicencio.edu.co.bookstore.repository.OrderRepository;
 
 @Service
