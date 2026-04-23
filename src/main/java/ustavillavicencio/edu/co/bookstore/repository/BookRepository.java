@@ -1,5 +1,6 @@
 package ustavillavicencio.edu.co.bookstore.repository;
 
+public class BookRepository {
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;

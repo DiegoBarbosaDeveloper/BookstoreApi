@@ -1,5 +1,7 @@
 package ustavillavicencio.edu.co.bookstore.dto.response;
 
+import java.math.BigDecimal;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,20 +11,17 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @Builder
 
-public class CategoryResponse {
+public class BookSummaryResponse {
 
-    private Long   id;
-    private String name;
-public class CategoryResponse {
+    private Long       id;
+    private String     title;
+    private String     isbn;
+    private BigDecimal price;
+    private Integer    stock;
 
-    private Long id;
-
-    private String name;
-
-    private String description;
 }
