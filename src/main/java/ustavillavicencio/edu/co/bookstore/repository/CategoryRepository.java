@@ -15,4 +15,9 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     @EntityGraph(attributePaths = {"books"})
     Optional<Category> findWithBooksById(Long id);
 
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import ustavillavicencio.edu.co.bookstore.entity.CategoryEntity;
+
+public interface CategoryRepository extends JpaRepository<CategoryEntity, Long> {
 }

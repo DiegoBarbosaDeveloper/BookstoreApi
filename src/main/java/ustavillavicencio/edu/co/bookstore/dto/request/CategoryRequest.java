@@ -25,4 +25,17 @@ public class CategoryRequest {
     @Size(max = 500, message = "La descripción no puede superar 500 caracteres")
     private String description;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class CategoryRequest {
+
+    @NotBlank(message = "El nombre de la categoria es obligatorio")
+    @Size(max = 120, message = "El nombre no puede superar 120 caracteres")
+    private String name;
+
+    @NotBlank(message = "La descripcion de la categoria es obligatoria")
+    @Size(max = 800, message = "La descripcion no puede superar 800 caracteres")
+    private String description;
 }

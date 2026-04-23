@@ -26,4 +26,33 @@ public class CategoryMapper {
         return dto;
     }
 
+import ustavillavicencio.edu.co.bookstore.entity.CategoryEntity;
+
+@Component
+public class CategoryMapper {
+
+    public CategoryEntity toEntity(CategoryRequest request) {
+        if (request == null) {
+            return null;
+        }
+
+        return new CategoryEntity(
+            null,
+            request.getName(),
+            request.getDescription(),
+            null
+        );
+    }
+
+    public CategoryResponse toResponse(CategoryEntity entity) {
+        if (entity == null) {
+            return null;
+        }
+
+        return new CategoryResponse(
+            entity.getId(),
+            entity.getName(),
+            entity.getDescription()
+        );
+    }
 }
