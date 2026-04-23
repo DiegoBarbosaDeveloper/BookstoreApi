@@ -38,7 +38,7 @@ public class OrderController {
 
         OrderResponse body = orderService.createOrder(request, userDetails.getUsername());
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(ApiResponse.success(201, "Pedido creado exitosamente", body));
+            .body(ApiResponse.created(body, "Pedido creado exitosamente"));
     }
 
     @GetMapping("/my")
@@ -47,7 +47,7 @@ public class OrderController {
             @AuthenticationPrincipal UserDetails userDetails) {
 
         List<OrderResponse> body = orderService.getMyOrders(userDetails.getUsername());
-        return ResponseEntity.ok(ApiResponse.success(200, "Tus pedidos", body));
+        return ResponseEntity.ok(ApiResponse.success(body, "Tus pedidos"));
     }
 
     @GetMapping
@@ -55,7 +55,7 @@ public class OrderController {
     public ResponseEntity<ApiResponse<List<OrderResponse>>> getAllOrders() {
 
         List<OrderResponse> body = orderService.getAllOrders();
-        return ResponseEntity.ok(ApiResponse.success(200, "Todos los pedidos", body));
+        return ResponseEntity.ok(ApiResponse.success(body, "Todos los pedidos"));
     }
 
     @PatchMapping("/{id}/cancel")
@@ -65,7 +65,7 @@ public class OrderController {
             @AuthenticationPrincipal UserDetails userDetails) {
 
         OrderResponse body = orderService.cancelOrder(id, userDetails.getUsername());
-        return ResponseEntity.ok(ApiResponse.success(200, "Pedido cancelado", body));
+        return ResponseEntity.ok(ApiResponse.success(body, "Pedido cancelado"));
     }
 
 }

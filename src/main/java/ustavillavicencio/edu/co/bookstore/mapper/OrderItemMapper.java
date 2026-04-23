@@ -1,16 +1,15 @@
 package ustavillavicencio.edu.co.bookstore.mapper;
 
-import org.hibernate.annotations.Comment;
 import org.springframework.stereotype.Component;
 
 import ustavillavicencio.edu.co.bookstore.dto.response.OrderItemResponse;
-import ustavillavicencio.edu.co.bookstore.entity.OrderItem;
+import ustavillavicencio.edu.co.bookstore.entity.OrderItemEntity;
 
 @Component
 
 public class OrderItemMapper {
 
-    public OrderItemResponse toResponse(OrderItem item) {
+    public OrderItemResponse toResponse(OrderItemEntity item) {
         OrderItemResponse dto = new OrderItemResponse();
         dto.setBookId(item.getBook().getId());
         dto.setBookTitle(item.getBook().getTitle());

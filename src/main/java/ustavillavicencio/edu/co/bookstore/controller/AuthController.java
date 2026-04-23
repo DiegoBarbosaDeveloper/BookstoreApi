@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
+import ustavillavicencio.edu.co.bookstore.dto.response.ApiResponse;
 import ustavillavicencio.edu.co.bookstore.dto.request.LoginRequest;
 import ustavillavicencio.edu.co.bookstore.dto.request.RegisterRequest;
 import ustavillavicencio.edu.co.bookstore.dto.response.AuthResponse;
@@ -23,12 +24,15 @@ public class AuthController {
 	private final AuthService authService;
 
 	@PostMapping("/register")
-	public ResponseEntity<AuthResponse> register(@Valid @RequestBody RegisterRequest request) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(request));
+	public ResponseEntity<ApiResponse<AuthResponse>> register(@Valid @RequestBody RegisterRequest request) {
+		AuthResponse response = authService.register(request);
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(ApiResponse.created(response, "Usuario registrado exitosamente"));
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
-		return ResponseEntity.ok(authService.login(request));
+	public ResponseEntity<ApiResponse<AuthResponse>> login(@Valid @RequestBody LoginRequest request) {
+		AuthResponse response = authService.login(request);
+		return ResponseEntity.ok(ApiResponse.success(response, "Inicio de sesion exitoso"));
 	}
 }

@@ -2,17 +2,16 @@ package ustavillavicencio.edu.co.bookstore.dto.response;
 
 import java.util.List;
 
-import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+
+import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 
 
-@AllArgsConstructor
-@NoArgsConstructor
+
 @Getter
-@Setter
+@Builder
 public class ApiResponse<T> {
     private boolean success;
     private String message;
@@ -21,5 +20,25 @@ public class ApiResponse<T> {
     private int errorCode;
     private long timestamp;
     private String path;
+
+    public static <T> ApiResponse<T> success(T data, String message) {
+        return ApiResponse.<T>builder()
+                .success(true)
+                .message(message)
+                .data(data)
+                .timestamp(System.currentTimeMillis())
+                .errorCode(HttpStatus.OK.value())
+                .build();
+    }
+
+    public static <T> ApiResponse<T> created(T data, String message) {
+        return ApiResponse.<T>builder()
+                .success(true)
+                .message(message)
+                .data(data)
+                .timestamp(System.currentTimeMillis())
+                .errorCode(HttpStatus.CREATED.value())
+                .build();
+    }
 
 }

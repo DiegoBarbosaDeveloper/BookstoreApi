@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import ustavillavicencio.edu.co.bookstore.dto.request.CategoryRequest;
+import ustavillavicencio.edu.co.bookstore.dto.response.ApiResponse;
 import ustavillavicencio.edu.co.bookstore.dto.response.BookResponse;
 import ustavillavicencio.edu.co.bookstore.dto.response.CategoryResponse;
 import ustavillavicencio.edu.co.bookstore.service.CategoryService;
@@ -32,38 +33,44 @@ public class CategoryController {
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<CategoryResponse> create(
+    public ResponseEntity<ApiResponse<CategoryResponse>> create(
             @Valid @RequestBody CategoryRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(categoryService.create(request));
+        CategoryResponse response = categoryService.create(request);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ApiResponse.created(response, "Categoria creada exitosamente"));
     }
 
     @GetMapping("/{id}")
-    public CategoryResponse findById(@PathVariable Long id) {
-        return categoryService.findById(id);
+    public ResponseEntity<ApiResponse<CategoryResponse>> findById(@PathVariable Long id) {
+        CategoryResponse response = categoryService.findById(id);
+        return ResponseEntity.ok(ApiResponse.success(response, "Categoria obtenida exitosamente"));
     }
 
     @GetMapping
-    public List<CategoryResponse> findAll() {
-        return categoryService.findAll();
+    public ResponseEntity<ApiResponse<List<CategoryResponse>>> findAll() {
+        List<CategoryResponse> response = categoryService.findAll();
+        return ResponseEntity.ok(ApiResponse.success(response, "Categorias obtenidas exitosamente"));
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public CategoryResponse update(
+    public ResponseEntity<ApiResponse<CategoryResponse>> update(
             @PathVariable Long id,
             @Valid @RequestBody CategoryRequest request) {
-        return categoryService.update(id, request);
+        CategoryResponse response = categoryService.update(id, request);
+        return ResponseEntity.ok(ApiResponse.success(response, "Categoria actualizada exitosamente"));
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse<Void>> delete(@PathVariable Long id) {
         categoryService.delete(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(ApiResponse.success(null, "Categoria eliminada exitosamente"));
     }
 
     @GetMapping("/{id}/books")
-    public List<BookResponse> findBooksByCategory(@PathVariable Long id) {
-        return categoryService.findBooksByCategoryId(id);
+    public ResponseEntity<ApiResponse<List<BookResponse>>> findBooksByCategory(@PathVariable Long id) {
+        List<BookResponse> response = categoryService.findBooksByCategoryId(id);
+        return ResponseEntity.ok(ApiResponse.success(response, "Libros de la categoria obtenidos exitosamente"));
     }
 }
