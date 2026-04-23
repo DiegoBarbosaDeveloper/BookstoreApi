@@ -3,7 +3,7 @@ package ustavillavicencio.edu.co.bookstore.mapper;
 import org.hibernate.annotations.Comment;
 import org.springframework.stereotype.Component;
 
-import ustavillavicencio.edu.co.bookstore.dto.Response.OrderItemResponse;
+import ustavillavicencio.edu.co.bookstore.dto.response.OrderItemResponse;
 import ustavillavicencio.edu.co.bookstore.entity.OrderItem;
 
 @Component

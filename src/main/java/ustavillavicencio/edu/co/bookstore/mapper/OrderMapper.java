@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import jakarta.persistence.criteria.Order;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import ustavillavicencio.edu.co.bookstore.dto.Response.OrderResponse;
+import ustavillavicencio.edu.co.bookstore.dto.response.OrderResponse;
 
 @Component
 @RequiredArgsConstructor

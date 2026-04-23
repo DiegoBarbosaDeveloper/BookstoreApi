@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import ustavillavicencio.edu.co.bookstore.dto.Request.OrderRequest;
-import ustavillavicencio.edu.co.bookstore.dto.Response.OrderResponse;
+import ustavillavicencio.edu.co.bookstore.dto.request.OrderRequest;
+import ustavillavicencio.edu.co.bookstore.dto.response.ApiResponse;
+import ustavillavicencio.edu.co.bookstore.dto.response.OrderResponse;
 import ustavillavicencio.edu.co.bookstore.service.OrderService;
 
 @RestController

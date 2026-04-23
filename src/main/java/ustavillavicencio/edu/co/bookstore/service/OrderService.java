@@ -2,8 +2,8 @@ package ustavillavicencio.edu.co.bookstore.service;
 
 import java.util.List;
 
-import ustavillavicencio.edu.co.bookstore.dto.Request.OrderRequest;
-import ustavillavicencio.edu.co.bookstore.dto.Response.OrderResponse;
+import ustavillavicencio.edu.co.bookstore.dto.request.OrderRequest;
+import ustavillavicencio.edu.co.bookstore.dto.response.OrderResponse;
 
 public interface OrderService {
 
