@@ -1,4 +1,4 @@
-package ustavillavicencio.edu.co.bookstore.respository;
+package ustavillavicencio.edu.co.bookstore.repository;
 
 import java.util.Optional;
 

@@ -17,7 +17,7 @@ import ustavillavicencio.edu.co.bookstore.dto.request.RegisterRequest;
 import ustavillavicencio.edu.co.bookstore.dto.response.AuthResponse;
 import ustavillavicencio.edu.co.bookstore.entity.UserEntity;
 import ustavillavicencio.edu.co.bookstore.enums.UserRole;
-import ustavillavicencio.edu.co.bookstore.respository.UserRepository;
+import ustavillavicencio.edu.co.bookstore.repository.UserRepository;
 import ustavillavicencio.edu.co.bookstore.security.JwtService;
 import ustavillavicencio.edu.co.bookstore.service.AuthService;
 
