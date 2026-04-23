@@ -1,15 +1,18 @@
-package ustavillavicencio.edu.co.bookstore.service.impl;
+package ustavillavicencio.edu.co.bookstore.impl;
 
 import java.util.List;
-import java.util.Locale.Category;
+import java.math.BigDecimal;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import ustavillavicencio.edu.co.bookstore.dto.request.CategoryRequest;
 import ustavillavicencio.edu.co.bookstore.dto.response.BookSummaryResponse;
 import ustavillavicencio.edu.co.bookstore.dto.response.CategoryResponse;
+import ustavillavicencio.edu.co.bookstore.entity.CategoryEntity;
+import ustavillavicencio.edu.co.bookstore.exception.custom.DuplicateResourceException;
+import ustavillavicencio.edu.co.bookstore.exception.custom.ResourceNotFoundException;
 import ustavillavicencio.edu.co.bookstore.mapper.CategoryMapper;
 import ustavillavicencio.edu.co.bookstore.repository.CategoryRepository;
 
@@ -17,9 +20,8 @@ import ustavillavicencio.edu.co.bookstore.repository.CategoryRepository;
 @RequiredArgsConstructor
 public class CategoryServiceImpl {
 
-     private final CategoryRepository categoryRepository;
-    private final CategoryMapper     categoryMapper;
-    private final BookMapper         bookMapper;
+    private final CategoryRepository categoryRepository;
+    private final CategoryMapper categoryMapper;
 
     @Transactional
     public CategoryResponse create(CategoryRequest request) {
@@ -27,7 +29,7 @@ public class CategoryServiceImpl {
             throw new DuplicateResourceException(
                     "Ya existe una categoría con el nombre '" + request.getName() + "'");
         }
-        Category category = categoryMapper.toEntity(request);
+        CategoryEntity category = categoryMapper.toEntity(request);
         return categoryMapper.toResponse(categoryRepository.save(category));
     }
 
@@ -45,7 +47,7 @@ public class CategoryServiceImpl {
 
     @Transactional
     public CategoryResponse update(Long id, CategoryRequest request) {
-        Category category = getOrThrow(id);
+        CategoryEntity category = getOrThrow(id);
         category.setName(request.getName());
         category.setDescription(request.getDescription());
         return categoryMapper.toResponse(categoryRepository.save(category));
@@ -58,16 +60,22 @@ public class CategoryServiceImpl {
 
     @Transactional(readOnly = true)
     public List<BookSummaryResponse> getBooksByCategory(Long categoryId) {
-        Category category = categoryRepository.findWithBooksById(categoryId)
+        CategoryEntity category = categoryRepository.findWithBooksById(categoryId)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Categoría con id " + categoryId + " no encontrada"));
 
         return category.getBooks().stream()
-                .map(bookMapper::toSummary)
+            .map(book -> BookSummaryResponse.builder()
+                .id(book.getId())
+                .title(book.getTitle())
+                .isbn(book.getIsbn())
+                .price(BigDecimal.valueOf(book.getPrice()))
+                .stock(book.getStock())
+                .build())
                 .toList();
     }
 
-    private Category getOrThrow(Long id) {
+        private CategoryEntity getOrThrow(Long id) {
         return categoryRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Categoría con id " + id + " no encontrada"));

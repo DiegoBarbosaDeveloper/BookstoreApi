@@ -1,4 +1,4 @@
-package ustavillavicencio.edu.co.enums;
+package ustavillavicencio.edu.co.bookstore.enums;
 
 public enum BookState {
     AVIAILABLE,

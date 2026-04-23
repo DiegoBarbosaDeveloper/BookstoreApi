@@ -16,7 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ustavillavicencio.edu.co.enums.BookState;
+import ustavillavicencio.edu.co.bookstore.enums.BookState;
 
 @Entity
 @Table(name = "books")
