@@ -17,7 +17,7 @@ public class ApiResponse<T> {
     private String message;
     private T data;
     private List<String> errors;
-    private int errorCode;
+    private int code;
     private long timestamp;
     private String path;
 
@@ -27,7 +27,7 @@ public class ApiResponse<T> {
                 .message(message)
                 .data(data)
                 .timestamp(System.currentTimeMillis())
-                .errorCode(HttpStatus.OK.value())
+                .code(HttpStatus.OK.value())
                 .build();
     }
 
@@ -37,7 +37,7 @@ public class ApiResponse<T> {
                 .message(message)
                 .data(data)
                 .timestamp(System.currentTimeMillis())
-                .errorCode(HttpStatus.CREATED.value())
+                .code(HttpStatus.CREATED.value())
                 .build();
     }
 
